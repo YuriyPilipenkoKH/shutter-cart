@@ -1,8 +1,9 @@
-import {NextAuthOptions} from 'next-auth'
+import {NextAuthOptions, Session, User as UserType} from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials"
 import { connectDB } from './lib/db';
 import bcrypt from 'bcryptjs';
 import User from './models/User';
+import { JWT } from 'next-auth/jwt';
 
 export const authOptions:NextAuthOptions = {
 
@@ -46,6 +47,21 @@ export const authOptions:NextAuthOptions = {
         }
       },
     }),
-    
-  ]
+  ],
+  callbacks: {
+    async jwt({ token, user }: { token: JWT; user?: UserType }):Promise<JWT>  {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }):Promise<Session> {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+      }
+      return session;
+    },
+  },
 }

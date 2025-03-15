@@ -5,6 +5,7 @@ export interface IUser {
   email: string;
   password: string;
   role: "user" | "admin";
+  image?: string
   _id?: mongoose.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -25,6 +26,10 @@ const userSchema = new Schema<IUser>(
       type: String, 
       enum: ["user", "admin"], 
       default: "user" 
+    },
+    image: { 
+      type: String, 
+      default: "/" 
     },
   },
   { timestamps: true }
