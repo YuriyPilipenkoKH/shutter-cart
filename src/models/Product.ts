@@ -57,9 +57,18 @@ const imageVariantSchema = new Schema<ImageVariant>({
 
 const productSchema = new Schema<IProduct>(
   {
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    imageUrl: { type: String, required: true },
+    name: { 
+      type: String, 
+      required: true 
+    },
+    description: { 
+      type: String,
+       required: true 
+      },
+    imageUrl: { 
+      type: String, 
+      required: true 
+    },
     variants: [imageVariantSchema],
   },
   { timestamps: true }

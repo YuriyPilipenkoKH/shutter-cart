@@ -45,17 +45,29 @@ const orderSchema = new Schema<IOrder>(
         enum: ["personal", "commercial"],
       },
     },
-    razorpayOrderId: { type: String, required: true },
-    razorpayPaymentId: { type: String },
-    amount: { type: Number, required: true },
+    razorpayOrderId: { 
+      type: String, 
+      required: true
+     },
+    razorpayPaymentId: { 
+      type: String 
+    },
+    amount: {
+       type: Number,
+       required: true 
+      },
     status: {
       type: String,
       required: true,
       enum: ["pending", "completed", "failed"],
       default: "pending",
     },
-    downloadUrl: { type: String },
-    previewUrl: { type: String },
+    downloadUrl: { 
+      type: String 
+    },
+    previewUrl: { 
+      type: String 
+    },
   },
   { timestamps: true }
 );
