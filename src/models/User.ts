@@ -1,12 +1,12 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models ,Document} from "mongoose";
 import bcrypt from "bcryptjs";
 
-export interface IUser {
+export interface IUser extends Document {
   email: string;
   password: string;
   role: "user" | "admin";
   image?: string
-  _id?: mongoose.Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
 }
