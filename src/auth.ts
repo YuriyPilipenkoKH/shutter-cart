@@ -1,5 +1,7 @@
 import {NextAuthOptions, Session, User as UserType} from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import { connectDB } from './lib/db';
 import bcrypt from 'bcryptjs';
 import User from './models/User';
@@ -8,6 +10,14 @@ import { JWT } from 'next-auth/jwt';
 export const authOptions:NextAuthOptions = {
 
   providers: [
+    GoogleProvider({
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+    }),
+    GithubProvider({
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
