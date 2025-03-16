@@ -39,3 +39,5 @@ export const RegisterSchema = z.object({
           message: "Include capital letters and numbers" 
       }),      
 })
+
+export type RegInput = z.infer <typeof RegisterSchema >
