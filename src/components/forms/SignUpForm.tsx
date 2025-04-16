@@ -15,7 +15,7 @@ const SignUpForm = () => {
     handleSubmit,
     formState,
     reset,
-    setError, // Use this to manually set server-side errors
+
   } = useForm<RegInput>({
     defaultValues: {
       name: '',
