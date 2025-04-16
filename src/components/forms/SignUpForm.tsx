@@ -41,7 +41,8 @@ const SignUpForm = () => {
     formData.append("password", data.password);
 
     const result = await registerUser(formData);
-    if (result.success && result?.user?.name) {
+    if (result.success ) {
+      console.log('result',result);
       // await nextAuthSignIn(result?.user?.name)
       reset();
       router.push('/login');

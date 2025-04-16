@@ -31,7 +31,6 @@ export async function registerUser (formData: FormData)  {
       }
       const hashedPassword = await hash(password, 10);
        // Create the user in the database
-console.log('hashedPassword',hashedPassword)
 
        const newUser = await User.create({
           name,
