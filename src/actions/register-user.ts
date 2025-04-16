@@ -23,8 +23,6 @@ export async function registerUser (formData: FormData)  {
   try {
     await connectDB();
 
-    // if (allowedEmails.includes(email)) {
-
       // Check if a user already exists with the same email
       const existingUser = await User.findOne({
         where: { email },
@@ -33,14 +31,14 @@ export async function registerUser (formData: FormData)  {
       if (existingUser) {
         return { success: false, error: 'emailAlreadyRegistered' };
       }
-      const hashedPassword =  hash(password, 10)
+      const hashedPassword = await hash(password, 10);
        // Create the user in the database
 
        const newUser = await User.create({
         data: {
           name,
           email,
-          password: hashedPassword,
+          password: await hashedPassword,
           role: "user", // Default role for new users
         },
       });
@@ -53,9 +51,7 @@ export async function registerUser (formData: FormData)  {
         message: "userRegistered", 
         user: plainUser
       };
-    // } else {
-    //   return { success: false, error: "emailNotAllowed" };
-    // }     
+ 
 
   }
    catch (error) {
