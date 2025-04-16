@@ -1,4 +1,6 @@
-export const options={
+import { CSSProperties } from "react";
+
+export const options= {
   success: {
     duration: 4000,
     style: {
@@ -16,3 +18,10 @@ export const options={
     },
   },
 }
+
+export const containerOptions: CSSProperties = {
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  position: 'fixed',
+};
