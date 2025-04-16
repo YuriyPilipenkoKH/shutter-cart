@@ -23,14 +23,12 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    // Protect only these paths
+    "/dashboard/:path*",
+    "/admin/:path*",
+    "/profile/:path*",
+    // Add more private routes as needed
+  ],
 };
 
-// export const config = {
-//   matcher: [
-//     '/dashboard/:path*',
-//     '/admin/:path*',
-//     '/profile/:path*',
-//     // Add more protected routes here if needed
-//   ],
-// }
