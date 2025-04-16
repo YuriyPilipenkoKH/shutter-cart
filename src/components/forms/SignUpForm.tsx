@@ -50,6 +50,11 @@ const SignUpForm = () => {
       console.log(result.error);
     }
   }
+  const handleInputChange =   () => {
+    if(logError) setLogError('')
+     
+    }
+
   return (
     <form onSubmit={handleSubmit(onSubmit) } 
     autoComplete="off"
@@ -57,7 +62,7 @@ const SignUpForm = () => {
     className='flex flex-col gap-4 items-center justify-center w-[400px]'>
       <label  className='w-full'>
         <input
-          {...register("name")}
+          {...register("name", { onChange: handleInputChange })}
           placeholder="Name"
           className="input input-primary w-full"
         />
@@ -66,7 +71,7 @@ const SignUpForm = () => {
 
       <label  className='w-full'>
         <input
-          {...register("email")}
+          {...register("email", { onChange: handleInputChange })}
           placeholder="Email"
           className="input input-primary w-full"
         />

@@ -40,13 +40,22 @@ console.log('hashedPassword',hashedPassword)
           role: "user", // Default role for new users
       });
 
-      // Exclude sensitive fields
-      const { password: _, ...plainUser } = newUser.toObject()
+    // Exclude sensitive fields
+    const userObj = newUser.toObject();
+
+    const plainUser = {
+      ...userObj,
+      _id: userObj._id.toString(),
+      createdAt: userObj.createdAt?.toISOString(),
+      updatedAt: userObj.updatedAt?.toISOString(),
+    };
+
+    const { password: _, ...safeUser } = plainUser;
       revalidatePath('/login');
       return { 
         success: true, 
         message: "userRegistered", 
-        user: plainUser
+        user: safeUser
       };
  
 
