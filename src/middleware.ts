@@ -1,52 +1,23 @@
-import { withAuth } from "next-auth/middleware"
-import { NextResponse } from "next/server";
+import { withAuth } from 'next-auth/middleware'
+import { NextResponse } from 'next/server'
 
 export default withAuth(
-
-  function middleware() {
-    return NextResponse.next();
+  function middleware(req) {
+    // You can do role-based checks here if needed
+    // e.g., only allow admin access to `/admin` route
+    // const isAdmin = req.nextauth?.token?.role === 'admin';
+    // if (req.nextUrl.pathname.startsWith('/admin') && !isAdmin) {
+    //   return NextResponse.redirect(new URL('/unauthorized', req.url));
+    // }
+    
+    return NextResponse.next()
   },
   {
-  callbacks: {
-    authorized: ({ token, req }) => {
-      const { pathname } = req.nextUrl;
-      // Allow webhook endpoint
-      if (pathname.startsWith("/api/webhook")) {
-        return true;
-      }
-   // Allow auth-related routes
-   if (
-    pathname.startsWith("/api/auth") ||
-    pathname === "/login" ||
-    pathname === "/register"
-  ) {
-    return true;
-  }
-
-  // Public routes
-  if (
-    pathname === "/" ||
-    pathname.startsWith("/api/products") ||
-    pathname.startsWith("/products")
-  ) {
-    return true;
-  }
-
-  // Admin routes require admin role
-  if (pathname.startsWith("/admin")) {
-    return token?.role === "admin";
-  }
-
-  // All other routes require authentication
-  return !!token;
-  },
-      }
+    callbacks: {
+      authorized: ({ token }) => !!token, // only allow if user is logged in
     },
-
+    pages: {
+      signIn: '/login',
+    },
+  }
 )
-
-export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|public/).*)",
-  ],
-};

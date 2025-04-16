@@ -7,6 +7,7 @@ import React from 'react'
 
 const RegisterPage =async () => {
   const session = await getServerSession(authOptions)
+  console.log(session);
   if (session) {
     redirect('/dashboard'); 
   }
