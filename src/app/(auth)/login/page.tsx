@@ -1,6 +1,9 @@
+
 import React from 'react'
 
-const LoginPage = () => {
+const LoginPage = async() => {
+    // const session = await getServerSession(authOptions)
+    // console.log(session);
   return (
     <div>LoginPage</div>
   )
