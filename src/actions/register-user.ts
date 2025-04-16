@@ -33,18 +33,17 @@ export async function registerUser (formData: FormData)  {
       }
       const hashedPassword = await hash(password, 10);
        // Create the user in the database
+console.log('hashedPassword',hashedPassword)
 
        const newUser = await User.create({
-        data: {
           name,
           email,
-          password: await hashedPassword,
+          password:  hashedPassword,
           role: "user", // Default role for new users
-        },
       });
 
       // Exclude sensitive fields
-      const { password: _, ...plainUser } = newUser;
+      const { password: _, ...plainUser } = newUser.toObject()
       revalidatePath('/login');
       return { 
         success: true, 
