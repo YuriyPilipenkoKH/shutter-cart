@@ -24,9 +24,7 @@ export async function registerUser (formData: FormData)  {
     await connectDB();
 
       // Check if a user already exists with the same email
-      const existingUser = await User.findOne({
-        where: { email },
-      });
+      const existingUser = await User.findOne({ email })
     
       if (existingUser) {
         return { success: false, error: 'emailAlreadyRegistered' };
