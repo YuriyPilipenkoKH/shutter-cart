@@ -1,11 +1,15 @@
 "use client"
+import { registerUser } from '@/actions/register-user'
 import { RegInput, RegisterSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ImSpinner9 } from "react-icons/im";
 
 const SignUpForm = () => {
+  const router = useRouter()
+  const [logError, setLogError] = useState<string>('')
   const {
     register, 
     handleSubmit,
@@ -33,6 +37,18 @@ const SignUpForm = () => {
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("password", data.password);
+
+    const result = await registerUser(formData);
+    if (result.success && result?.user?.name) {
+      // await nextAuthSignIn(result?.user?.name)
+      reset();
+      router.push('/login');
+      
+    }
+    else if (!result.success) {
+      setLogError(result?.error || '');
+      console.log(result.error);
+    }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit) } 
@@ -65,6 +81,7 @@ const SignUpForm = () => {
           className="input input-primary w-full"
         />
         {errors.password && <p className="text-purple-900">{errors.password.message}</p>}
+        {  !errors.email && !errors.password && logError && <div>{logError}</div>}
       </label>
 
       <button
