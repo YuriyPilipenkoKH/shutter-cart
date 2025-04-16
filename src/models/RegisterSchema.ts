@@ -34,10 +34,10 @@ export const RegisterSchema = z.object({
       ,
   password: z
       .string()
-      .min(6, "Minimum 6 characters for password")
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d$#&]*$/, { 
-          message: "Include capital letters and numbers" 
-      }),      
+      .min(4, "Minimum 4 characters for password")
+      // .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d$#&]*$/, { 
+      //     message: "Include capital letters and numbers" 
+      // }),      
 })
 
 export type RegInput = z.infer <typeof RegisterSchema >
