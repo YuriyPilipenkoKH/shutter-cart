@@ -14,13 +14,16 @@ export async function registerUser (formData: FormData)  {
   const allowedEmails = process.env.ALLOWED_EMAILS?.split(',') || [];
 
   if (!name || !email || !password) {
-    throw new Error("requiredFields");
+    return { success: false, error: "requiredFields" };
+  }
+  if (!allowedEmails.includes(email)) {
+    return { success: false, error: "emailNotAllowed" };
   }
 
   try {
     await connectDB();
 
-    if (allowedEmails.includes(email)) {
+    // if (allowedEmails.includes(email)) {
 
       // Check if a user already exists with the same email
       const existingUser = await User.findOne({
@@ -44,15 +47,15 @@ export async function registerUser (formData: FormData)  {
 
       // Exclude sensitive fields
       const { password: _, ...plainUser } = newUser;
-      revalidatePath('/dashboard');
+      revalidatePath('/login');
       return { 
         success: true, 
         message: "userRegistered", 
         user: plainUser
       };
-    } else {
-      return { success: false, error: "emailNotAllowed" };
-    }     
+    // } else {
+    //   return { success: false, error: "emailNotAllowed" };
+    // }     
 
   }
    catch (error) {
