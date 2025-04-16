@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { ImSpinner9 } from "react-icons/im";
 
 const SignUpForm = () => {
@@ -43,7 +44,7 @@ const SignUpForm = () => {
       // await nextAuthSignIn(result?.user?.name)
       reset();
       router.push('/login');
-      
+      toast.success(`Successful registration, ${result?.user?.name} `)
     }
     else if (!result.success) {
       setLogError(result?.error || '');

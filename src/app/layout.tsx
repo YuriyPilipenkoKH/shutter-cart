@@ -29,20 +29,17 @@ export default async  function RootLayout({
 }>) {
   const session = await getServerSession(authOptions)
   console.log(session);
+  
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers session={session}>
-          {children}
-        </Providers>
-        <Toaster 
-      //  position="top-center" 
-      toastOptions={options} 
-      containerStyle={containerOptions}
-      />
-
+      <body  className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+          <Providers session={session}>
+            {children}
+          </Providers>
+          <Toaster 
+          //  position="top-center" 
+          toastOptions={options} 
+          containerStyle={containerOptions}  />
       </body>
     </html>
   );
