@@ -1,5 +1,6 @@
 "use client"
 import { registerUser } from '@/actions/register-user'
+import capitalize from '@/lib/capitalize'
 import { RegInput, RegisterSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -44,7 +45,7 @@ const SignUpForm = () => {
       // await nextAuthSignIn(result?.user?.name)
       reset();
       router.push('/login');
-      toast.success(`Successful registration, ${result?.user?.name} `)
+      toast.success(`Successful registration, ${capitalize(result?.user?.name)} `)
     }
     else if (!result.success) {
       setLogError(result?.error || '');
