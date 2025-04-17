@@ -51,6 +51,7 @@ const LoginForm = () => {
       setLogError(result?.error || '');
       console.log(result.error);
     }
+    
     const nextAuthSignIn = async (userName: string) => {
       const signInResponse = await signIn("credentials", {
         redirect: false,
@@ -61,6 +62,9 @@ const LoginForm = () => {
         console.error("SignIn error:", signInResponse.error);
         return;
       }
+      if (signInResponse?.ok){
+        toast.success(`${'login.success'} ${capitalize(userName)}! ` );
+      } 
     }
 
     }
