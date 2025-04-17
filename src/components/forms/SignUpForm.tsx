@@ -83,7 +83,7 @@ const SignUpForm = () => {
 
       <label className='w-full'>
         <input
-          {...register("password")}
+          {...register("password", { onChange: handleInputChange })}
           // type="password"
           placeholder="Password"
           className="input input-primary w-full"
