@@ -39,10 +39,25 @@ const LoginForm = () => {
       formData.append("email", data.email);
       formData.append("password", data.password);
 
+      const nextAuthSignIn = async (userName: string) => {
+        const signInResponse = await signIn("credentials", {
+          redirect: false,
+          email: data.email,
+          password: data.password,
+        });
+        if (signInResponse?.error) {
+          console.error("SignIn error:", signInResponse.error);
+          return;
+        }
+        if (signInResponse?.ok){
+          toast.success(`${'login.success'} ${capitalize(userName)}! ` );
+        } 
+      }
+
       const result = await loginUser( formData );
       if (result.success ) {
       console.log('result',result);
-      // await nextAuthSignIn(result?.user?.name)
+      await nextAuthSignIn(result?.user?.name)
       reset();
       router.push('/dashboard');
       toast.success(`Successful login, ${capitalize(result?.user?.name)} `)
@@ -51,21 +66,8 @@ const LoginForm = () => {
       setLogError(result?.error || '');
       console.log(result.error);
     }
-    
-    const nextAuthSignIn = async (userName: string) => {
-      const signInResponse = await signIn("credentials", {
-        redirect: false,
-        email: data.email,
-        password: data.password,
-      });
-      if (signInResponse?.error) {
-        console.error("SignIn error:", signInResponse.error);
-        return;
-      }
-      if (signInResponse?.ok){
-        toast.success(`${'login.success'} ${capitalize(userName)}! ` );
-      } 
-    }
+
+
 
     }
     const handleInputChange =   () => {
