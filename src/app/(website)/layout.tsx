@@ -8,13 +8,13 @@ interface Props {
 }
 
 
-const layout = async ({ children }: Props) => {
+const Layout = async ({ children }: Props) => {
   const session = await getServerSession(authOptions)
 
-  if (!session) redirect('/login'); 
+  // if (!session) redirect('/login'); 
   return (
-    <main className="flex-1 p-4 md:p-6">{children}</main>
+    <main className="flex-1 p-4 md:p-6 bg-green-900">{children}</main>
   )
 }
 
-export default layout
+export default Layout
