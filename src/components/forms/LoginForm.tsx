@@ -1,9 +1,12 @@
 "use client"
+import { loginUser } from '@/actions/login-user'
+import capitalize from '@/lib/capitalize'
 import { LogInput, loginSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { ImSpinner9 } from 'react-icons/im'
 
 const LoginForm = () => {
@@ -34,6 +37,19 @@ const LoginForm = () => {
       const formData = new FormData();
       formData.append("email", data.email);
       formData.append("password", data.password);
+
+      const result = await loginUser( formData );
+      if (result.success ) {
+      console.log('result',result);
+      // await nextAuthSignIn(result?.user?.name)
+      reset();
+      router.push('/dashboard');
+      toast.success(`Successful login, ${capitalize(result?.user?.name)} `)
+    }
+    else if (!result.success) {
+      setLogError(result?.error || '');
+      console.log(result.error);
+    }
     }
     const handleInputChange =   () => {
     if(logError) setLogError('')
