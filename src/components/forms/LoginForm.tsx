@@ -57,6 +57,10 @@ const LoginForm = () => {
         email: data.email,
         password: data.password,
       });
+      if (signInResponse?.error) {
+        console.error("SignIn error:", signInResponse.error);
+        return;
+      }
     }
 
     }
