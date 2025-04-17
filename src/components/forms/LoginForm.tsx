@@ -3,6 +3,7 @@ import { loginUser } from '@/actions/login-user'
 import capitalize from '@/lib/capitalize'
 import { LogInput, loginSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -50,14 +51,20 @@ const LoginForm = () => {
       setLogError(result?.error || '');
       console.log(result.error);
     }
+    const nextAuthSignIn = async (userName: string) => {
+      const signInResponse = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+    }
+
     }
     const handleInputChange =   () => {
     if(logError) setLogError('')
     }
 
-    const nextAuthSignIn = async (userName: string) => {
-      
-    }
+
   return (
      <form onSubmit={handleSubmit(onSubmit) } 
        autoComplete="off"
