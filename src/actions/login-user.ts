@@ -2,7 +2,7 @@
 
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
-import { hash } from 'bcryptjs';
+import { compareSync, hash } from 'bcryptjs';
 import { revalidatePath } from "next/cache";
 
 export async function loginUser (formData: FormData)  {
@@ -15,6 +15,11 @@ export async function loginUser (formData: FormData)  {
   try {
     await connectDB();
     const existingUser = await User.findOne({ email })
+    if (!existingUser) {
+      return { success: false, error: 'usernotFound' };
+    }
+      // Check if the password is correct
+  const passwordCompare = compareSync(password, existingUser.password)
   }    
   catch (error) {
     console.error('Error occurred while login:', error);
