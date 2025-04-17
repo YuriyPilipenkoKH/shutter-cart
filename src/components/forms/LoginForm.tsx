@@ -33,6 +33,10 @@ const LoginForm = () => {
         formData.append("email", data.email);
         formData.append("password", data.password);
      }
+     const handleInputChange =   () => {
+      if(logError) setLogError('')
+       
+      }
   return (
     <div>LoginForm</div>
   )
