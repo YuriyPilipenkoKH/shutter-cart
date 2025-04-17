@@ -14,15 +14,18 @@ export async function loginUser (formData: FormData)  {
   }
   try {
     await connectDB();
-    const existingUser = await User.findOne({ email })
-    if (!existingUser) {
+    const user = await User.findOne({ email })
+    if (!user) {
       return { success: false, error: 'usernotFound' };
     }
       // Check if the password is correct
-  const passwordCompare = compareSync(password, existingUser.password)
+  const passwordCompare = compareSync(password, user.password)
   if (!passwordCompare) {
     return { success: false, error: 'Invalid credentials' };
   }
+  revalidatePath('/dashboard');
+  return { success: true, user: {name: user.name, email: user.email}}
+  
   }    
   catch (error) {
     console.error('Error occurred while login:', error);
