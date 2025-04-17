@@ -20,6 +20,9 @@ export async function loginUser (formData: FormData)  {
     }
       // Check if the password is correct
   const passwordCompare = compareSync(password, existingUser.password)
+  if (!passwordCompare) {
+    return { success: false, error: 'Invalid credentials' };
+  }
   }    
   catch (error) {
     console.error('Error occurred while login:', error);
