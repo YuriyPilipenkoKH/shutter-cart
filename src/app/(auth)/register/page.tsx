@@ -12,7 +12,7 @@ const RegisterPage =async () => {
   <div className='p-6 flex flex-col gap-5 items-center justify-center'>
       <h2>Welcome</h2>
       <SignUpForm/>
-      <Link href={'/login'}>Have an account </Link>
+      <Link href={'/login'}>Have an account? </Link>
   </div>
   )
 }

@@ -1,3 +1,4 @@
+"use client"
 import { LogInput, loginSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -68,7 +69,7 @@ const LoginForm = () => {
            className="btn btn-primary bg-green-900 w-full"
            disabled={isSubmitting || !isValid || !isDirty} >
            {isSubmitting ? <ImSpinner9 className='animate-spin'/> : null}
-           {isSubmitting ? "Sending..." : "Sign Up"}
+           {isSubmitting ? "Sending..." : "Login"}
          </button>
        </form>
   )
