@@ -1,9 +1,12 @@
 import { LogInput, loginSchema } from '@/models/RegisterSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const LoginForm = () => {
+    const router = useRouter()
+    const [logError, setLogError] = useState<string>('')
     const {
       register, 
       handleSubmit,
