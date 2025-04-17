@@ -12,4 +12,15 @@ export async function loginUser (formData: FormData)  {
   if ( !email || !password) {
     return { success: false, error: "requiredFields" };
   }
+  try {
+    await connectDB();
+    const existingUser = await User.findOne({ email })
+  }    
+  catch (error) {
+    console.error('Error occurred while login:', error);
+    const errorMessage = error instanceof Error 
+    ? error.message 
+    : "UnexpectedErrord";
+    return { success: false, error: errorMessage }
+  }
 }
