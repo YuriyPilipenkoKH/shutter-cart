@@ -54,6 +54,10 @@ const LoginForm = () => {
     const handleInputChange =   () => {
     if(logError) setLogError('')
     }
+
+    const nextAuthSignIn = async (userName: string) => {
+      
+    }
   return (
      <form onSubmit={handleSubmit(onSubmit) } 
        autoComplete="off"
