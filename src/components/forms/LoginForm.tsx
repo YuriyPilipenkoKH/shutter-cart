@@ -24,6 +24,12 @@ const LoginForm = () => {
       isValid ,
       isSubmitting,
     } = formState
+     const onSubmit= async (data:LogInput) => {
+ 
+        const formData = new FormData();
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+     }
   return (
     <div>LoginForm</div>
   )

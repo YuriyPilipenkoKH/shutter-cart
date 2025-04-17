@@ -34,7 +34,7 @@ const SignUpForm = () => {
     isSubmitting,
   } = formState
   const onSubmit= async (data:RegInput) => {
-    console.log(data);
+  
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
