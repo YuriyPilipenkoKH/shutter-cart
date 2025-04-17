@@ -18,6 +18,12 @@ const LoginForm = () => {
         mode:'onBlur',
         resolver: zodResolver(loginSchema),
     })
+    const {
+      errors,
+      isDirty,
+      isValid ,
+      isSubmitting,
+    } = formState
   return (
     <div>LoginForm</div>
   )
