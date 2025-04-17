@@ -40,4 +40,10 @@ export const RegisterSchema = z.object({
       // }),      
 })
 
+export const loginSchema = RegisterSchema.pick({
+  email: true,
+  password: true,
+});
+
 export type RegInput = z.infer <typeof RegisterSchema >
+export type LogInput = z.infer<typeof loginSchema>;
