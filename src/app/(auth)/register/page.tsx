@@ -1,10 +1,13 @@
+import { authOptions } from '@/auth'
 import SignUpForm from '@/components/forms/SignUpForm'
+import { getServerSession } from 'next-auth'
+
 import Link from 'next/link'
 import React from 'react'
 
 const RegisterPage =async () => {
-  // const session = await getServerSession(authOptions)
-  // console.log(session);
+  const session = await getServerSession(authOptions)
+  console.log(session);
   // if (session) {
   //   redirect('/dashboard'); 
   // }
