@@ -8,7 +8,7 @@ const DashboardPage = async() => {
     const username =  session?.user.name
     console.log(session);
   return (
-    <div >
+    <div className='flex gap-12'>
       <p>DashboardPage</p>
       <LogoutButton username={username ?? 'Dude'}/>
     </div>

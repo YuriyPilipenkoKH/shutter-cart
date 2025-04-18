@@ -1,0 +1,47 @@
+.FlatBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  font-weight: 600;
+  border-radius: 50%; 
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+  background-color: #5983679b;
+  }
+  &:disabled{
+  background-color: #888;
+  }
+}
+
+.theme-changer{
+  position: relative;
+  border: 2px solid var(--background-color);
+  border-radius:10px ;
+  padding: 6px;
+
+}
+
+.close-theme{
+  background-color: var(--yellow);
+  z-index: 5;
+  border-radius: 50%;
+  padding: 0 !important;
+}
+.theme-changer>.close-theme >svg{
+    fill: var(--background-color) ;
+}
+.theme-changer>.btn{
+  height: 32px ;
+  min-height: 32px;
+}
+
+.Header>.logout-btn ,
+.Header>.login-btn {
+  height: 32px ;
+  min-height: 32px;
+}

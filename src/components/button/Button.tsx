@@ -1,5 +1,5 @@
 'use client'
-import '../styles/ButtonStyles.css'
+import '../css/ButtonStyles.css'
 import { logoutUser } from '@/actions/logout-user';
 import capitalize from '@/lib/capitalize';
 import { useRouter } from 'next/navigation';
