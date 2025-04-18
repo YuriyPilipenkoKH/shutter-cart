@@ -66,14 +66,18 @@ export const authOptions:NextAuthOptions = {
     async jwt({ token, user }: { token: JWT; user?: UserType }):Promise<JWT>  {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
         token.role = user.role;
+        token.image = user.image;
       }
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }):Promise<Session> {
-      if (session.user) {
+      if (token) {
         session.user.id = token.id as string;
+        session.user.name = token.name as string;
         session.user.role = token.role as string;
+        session.user.image = token.image as string;
       }
       return session;
     },
