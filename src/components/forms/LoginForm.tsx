@@ -67,7 +67,7 @@ const LoginForm = () => {
       console.log(result.error);
     }
     }
-    
+
     const handleInputChange =   () => {
     if(logError) setLogError('')
     }

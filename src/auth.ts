@@ -1,4 +1,4 @@
-import {   NextAuthOptions, Session, User as UserType } from 'next-auth'
+import {   Account, NextAuthOptions, Session, User as UserType } from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
@@ -75,6 +75,7 @@ export const authOptions:NextAuthOptions = {
       }
       return session;
     },
+
     // async signIn( 
     //   {user, account}: {
     //   user: UserType; // Use the Prisma User type here
