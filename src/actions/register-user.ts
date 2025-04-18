@@ -2,7 +2,7 @@
 
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
-import { hash } from 'bcryptjs';
+import {  hashSync } from 'bcryptjs';
 import { revalidatePath } from "next/cache";
 
 
@@ -22,14 +22,13 @@ export async function registerUser (formData: FormData)  {
 
   try {
     await connectDB();
-
       // Check if a user already exists with the same email
       const existingUser = await User.findOne({ email })
     
       if (existingUser) {
         return { success: false, error: 'emailAlreadyRegistered' };
       }
-      const hashedPassword = await hash(password, 10);
+      const hashedPassword =  hashSync(password, 10);
        // Create the user in the database
 
        const newUser = await User.create({

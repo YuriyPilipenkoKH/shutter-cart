@@ -2,7 +2,7 @@
 
 import { connectDB } from '@/lib/db';
 import User from '@/models/User';
-import { compare  } from 'bcryptjs';
+import {  compareSync  } from 'bcryptjs';
 import { revalidatePath } from "next/cache";
 
 export async function loginUser (formData: FormData)  {
@@ -22,7 +22,7 @@ export async function loginUser (formData: FormData)  {
       return { success: false, error: 'usernotFound' };
     }
       // Check if the password is correct
-  const passwordCompare =  compare(password, user.password)
+  const passwordCompare =  compareSync(password, user.password)
   if (!passwordCompare) {
     return { success: false, error: 'Invalid credentials' };
   }
