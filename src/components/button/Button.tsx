@@ -39,7 +39,7 @@ import toast from 'react-hot-toast';
 };
 
 type LogoutButtonProps = {
-  username: string; // Accept undefined as well
+  username?: string; // Accept undefined as well
 };
 
 
