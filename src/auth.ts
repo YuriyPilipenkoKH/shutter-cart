@@ -82,43 +82,43 @@ export const authOptions:NextAuthOptions = {
       return session;
     },
 
-    // async signIn( 
-    //   {user, account}: {
-    //   user: UserType; // Use the Prisma User type here
-    //   account: Account | null;
-    // }):Promise<boolean> {
-    //   try {
-    //     await connectDB();
+    async signIn( 
+      {user, account}: {
+      user: UserType; // Use the Prisma User type here
+      account: Account | null;
+    }):Promise<boolean> {
+      try {
+        await connectDB();
 
-    //     if (account?.provider === "credentials") {
-    //       // ✅ User already authenticated via credentials in `authorize()`
-    //       return true;
-    //     }
+        if (account?.provider === "credentials") {
+          // ✅ User already authenticated via credentials in `authorize()`
+          return true;
+        }
 
-    //     if (account?.provider === "google" || account?.provider === "github") {
-    //       // ✅ Check if user already exists in the database
-    //       const existingUser = await User.findOne({ email: user.email });
+        if (account?.provider === "google" || account?.provider === "github") {
+          // ✅ Check if user already exists in the database
+          const existingUser = await User.findOne({ email: user.email });
     
-    //       if (!existingUser) {
-    //         // ✅ Create a new user in MongoDB
-    //         const newUser = new User({
-    //           email: user.email,
-    //           name: user.name || "No Name",
-    //           image: user.image || "",
-    //           password: "", // OAuth users don't have passwords
-    //           role: "user",
-    //         });
+          if (!existingUser) {
+            // ✅ Create a new user in MongoDB
+            const newUser = new User({
+              email: user.email,
+              name: user.name || "Dude",
+              image: user.image || "",
+              password: "", // OAuth users don't have passwords
+              role: "user",
+            });
     
-    //         await newUser.save();
-    //       }
-    //     }
+            await newUser.save();
+          }
+        }
 
-    //     return true;
-    //   } catch (error) {
-    //     console.error("Error while creating user:", error);
-    //     return false;
-    //   }
-    // }
+        return true;
+      } catch (error) {
+        console.error("Error while creating user:", error);
+        return false;
+      }
+    }
   },
   pages: {
     signIn: "/login",

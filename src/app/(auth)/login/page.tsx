@@ -1,5 +1,6 @@
 import { authOptions } from '@/auth'
 import LoginForm from '@/components/forms/LoginForm'
+import SocialLogin from '@/components/SocialLogin'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
@@ -16,6 +17,7 @@ const LoginPage = async() => {
       <h2>Enter</h2>
       <LoginForm/>
       <Link href={'/register'}>Need an account? </Link>
+      <SocialLogin/>
     </div>
   )
 }
