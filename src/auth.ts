@@ -112,6 +112,9 @@ export const authOptions:NextAuthOptions = {
             await newUser.save();
           }
         }
+        else if (!user.email) {
+          throw new Error("Email not available from provider");
+        }
 
         return true;
       } catch (error) {
