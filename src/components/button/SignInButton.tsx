@@ -1,9 +1,10 @@
 'use client'
+import { githubSignIn } from '@/actions/github-signin';
+import { googleSignIn } from '@/actions/google-signin';
 import React, { useActionState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { GrGithub } from "react-icons/gr";
-import { googleSignIn } from '@/actions/google-signin'
-import { githubSignIn } from '@/actions/github-signin'
+
 
 
 
@@ -22,14 +23,14 @@ const SignInButton = ({provider}:SignInButtonProps) => {
       >
       <button className='flex w-full justify-center border rounded-lg p-2 space-x-2 items-center'>
           <p>
-            {`${t('title')} ${(provider === 'google') ? 'Google' : 'Github'}`}
+            {`${'Login with'} ${(provider === 'google') ? 'Google' : 'Github'}`}
             </p> 
             {(provider === 'google') 
             ? <FcGoogle className='h-5 w-5' />
             : <GrGithub className='h-5 w-5' />
             }
       </button>
-      <p>{isPending ? t('loading') : message}</p>
+      <p>{isPending ? 'loading' : typeof message === 'string' ? message : ''}</p>
     </form>
     )
 
