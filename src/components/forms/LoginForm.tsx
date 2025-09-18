@@ -18,8 +18,7 @@ const LoginForm = () => {
       handleSubmit,
       formState,
       reset,
-  
-    } = useForm<LogInput>({
+      } = useForm<LogInput>({
       defaultValues: {
         email: '',
         password: '',
@@ -33,6 +32,7 @@ const LoginForm = () => {
       isValid ,
       isSubmitting,
     } = formState
+
     const onSubmit= async (data:LogInput) => {
 
       const formData = new FormData();
